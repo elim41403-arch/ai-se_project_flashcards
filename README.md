@@ -20,3 +20,7 @@ Engineering program. It has decks of flashcards about different topics that can 
 ![the carousel view of a deck](./assets/images/demo/deck-carousel.png)
 ![the home page view of the decks](./assets/images/demo/home-page.png)
 ![the not found page](./assets/images/demo/not-found-page.png)
+
+## Deployed Site
+
+Check out [this site] (https://elim41403-arch.github.io/ai-se_project_flashcards) on GitHub Pages.
