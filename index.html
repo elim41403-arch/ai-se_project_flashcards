@@ -1,0 +1,94 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Software Engineering Flashcard Studier</title>
+    <meta name="author" content="Ethan Lim" />
+    <meta
+      name="description"
+      content="A website with a app to make flashcards on tech topics to help you study and practice concepts."
+    />
+    <meta
+      name="keywords"
+      content="study aid, flashcards, learning material, tech help"
+    />
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <link rel="stylesheet" href="assets/vendor/normalize.css" />
+    <link rel="stylesheet" href="assets/css/style.css" />
+  </head>
+  <body class="page">
+    <header class="header">
+      <h1 class="header__title">
+        <a class="header__link" href="#home">Flash Cards</a>
+      </h1>
+      <nav class="nav">
+        <ul class="nav__links">
+          <li><a class="nav__link" href="#home">My Decks</a></li>
+          <li><a class="nav__link" href="#about">About</a></li>
+        </ul>
+      </nav>
+    </header>
+    <main class="page__main-content">
+      <section id="home">
+        <h2 class="decks__title">My Decks</h2>
+        <div class="decks wrapping-row">
+          <ul class="decks__list wrapping-row__display-content"></ul>
+          <button class="decks__new-deck-btn">+ New Deck</button>
+        </div>
+      </section>
+
+      <section id="carousel" class="carousel">
+        <h2 class="carousel__title"></h2>
+        <div class="carousel__card_row">
+          <button
+            type="button"
+            class="carousel__btn carousel__btn_type_left carousel__btn__disabled"
+            aria-label="Go to Previous Card"
+          ></button>
+          <div class="carousel__card">
+            <p class="carousel__card-text"></p>
+          </div>
+          <button
+            type="button"
+            class="carousel__btn carousel__btn_type_right"
+            aria-label="Go to Next Card"
+          ></button>
+        </div>
+        <button
+          type="button"
+          class="carousel__btn carousel__btn_type_flip"
+          aria-label="Flip the Card"
+        ></button>
+      </section>
+
+      <section id="not-found" class="not-found">
+        <h2 class="not-found__status-code">404</h2>
+        <p class="not-found__text">Sorry, nothing found!</p>
+      </section>
+    </main>
+    <template id="deck-template">
+      <li class="deck deck_color">
+        <a class="deck__link" href="#"></a>
+        <p class="deck__title"></p>
+        <div class="deck__row">
+          <p class="deck__count"></p>
+          <button
+            type="button"
+            class="deck__delete-btn"
+            aria-label="Delete this deck."
+          ></button>
+        </div>
+      </li>
+    </template>
+    <footer class="footer"></footer>
+    <p class="footer__text">&copy; 2026 Ethan Lim</p>
+    <script src="assets/js/index.js" type="module"></script>
+  </body>
+</html>
