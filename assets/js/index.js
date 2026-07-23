@@ -1,30 +1,35 @@
 import { decks, getDeckByID } from "./decks.js";
 import { stringToHex, hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
+import { renderDeckView } from "./deck-view.js";
 
 const homeSection = document.querySelector("#home");
+const deckViewSection = document.querySelector("#deck-view");
 const carouselSection = document.querySelector("#carousel");
 const notFoundSection = document.querySelector("#not-found");
 
+const homeGalleryListEl = homeSection.querySelector(".gallery__list");
 const pageMainContentEl = document.querySelector(".page__main-content");
 
 function renderHomeView() {
   homeSection.style.display = "block";
+  deckViewSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "none";
 
+  homeGalleryListEl.innerHTML = "";
+
   const deckTemplateEl = document.querySelector("#deck-template");
-  const deckContainerEl = document.querySelector(".gallery__list");
-  deckContainerEl.innerHTML = "";
 
   function createDeckEl(item) {
     const deckEl = deckTemplateEl.content.querySelector("li").cloneNode(true);
+    deckEl.classList.remove("card_color");
 
     const stringColor = hexToString(item.color);
     deckEl.classList.add(`card_color_${stringColor}`);
 
     const deckLinkEl = deckEl.querySelector(".card__link");
-    deckLinkEl.href = `#carousel/${item.id}`;
+    deckLinkEl.href = `#deck/${item.id}`;
 
     const deckTitleEl = deckEl.querySelector(".card__title");
     deckTitleEl.textContent = item.name;
@@ -34,6 +39,7 @@ function renderHomeView() {
 
     const deleteBtn = deckEl.querySelector(".card__delete-btn");
     deleteBtn.addEventListener("click", () => {
+      item.cards = [];
       deckEl.remove();
     });
 
@@ -42,16 +48,19 @@ function renderHomeView() {
 
   function renderDeckEl(item) {
     const deckEl = createDeckEl(item);
-    deckContainerEl.prepend(deckEl);
+    homeGalleryListEl.prepend(deckEl);
   }
 
   decks.forEach(renderDeckEl);
+  pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
 function renderNotFoundView() {
   homeSection.style.display = "none";
+  deckViewSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "flex";
+  pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
 function router() {
@@ -59,19 +68,29 @@ function router() {
 
   if (hash === "home" || hash === "") {
     renderHomeView();
-    pageMainContentEl.classList.remove("page__main-content_location_carousel");
+  } else if (hash.startsWith("deck/")) {
+    const [, deckId] = hash.split("/");
+    const deck = getDeckByID(deckId);
+    if (!deck) {
+      renderNotFoundView();
+      return;
+    }
+    renderDeckView(deck);
   } else if (hash.startsWith("carousel/")) {
+    const [, deckId] = hash.split("/");
+    const deck = getDeckByID(deckId);
+    if (!deck) {
+      renderNotFoundView();
+      return;
+    }
     homeSection.style.display = "none";
+    deckViewSection.style.display = "none";
     carouselSection.style.display = "flex";
     notFoundSection.style.display = "none";
     pageMainContentEl.classList.add("page__main-content_location_carousel");
-
-    const [, deckId] = hash.split("/");
-    const deck = getDeckByID(deckId);
     renderCarouselView(deck);
   } else {
     renderNotFoundView();
-    pageMainContentEl.classList.remove("page__main-content_location_carousel");
   }
 }
 
