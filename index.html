@@ -35,8 +35,19 @@
       </nav>
     </header>
     <main class="page__main-content">
-      <section id="home">
+      <section id="home" class="gallery">
         <h2 class="gallery__title">My Decks</h2>
+        <div class="gallery wrapping-row">
+          <ul class="gallery__list wrapping-row__display-content"></ul>
+          <button class="gallery__new-card-btn">+ New Deck</button>
+        </div>
+      </section>
+
+      <section id="deck-view" class="gallery">
+        <div>
+          <h2 class="gallery__title"></h2>
+          <button class="gallery__practice-btn"></button>
+        </div>
         <div class="gallery wrapping-row">
           <ul class="gallery__list wrapping-row__display-content"></ul>
           <button class="gallery__new-card-btn">+ New Card</button>
@@ -78,6 +89,23 @@
         <p class="card__title"></p>
         <div class="card__row">
           <p class="card__count"></p>
+          <button
+            type="button"
+            class="card__delete-btn"
+            aria-label="Delete this deck."
+          ></button>
+        </div>
+      </li>
+    </template>
+    <template id="flashcard-template">
+      <li class="card card_color">
+        <p class="card__title"></p>
+        <div class="card__row">
+          <button
+            type="button"
+            class="card__flip-btn"
+            aria-label="Flip this card."
+          ></button>
           <button
             type="button"
             class="card__delete-btn"
