@@ -1,0 +1,40 @@
+.gallery {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px 20px;
+}
+
+.gallery__title {
+  margin-top: 0;
+  margin-bottom: 40px;
+}
+
+.gallery__list {
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+.gallery__new-card-btn {
+  cursor: pointer;
+  width: 325px;
+  height: 205px;
+  padding: 20px;
+  border-radius: 20px;
+  display: flex;
+  font-weight: 700;
+  font-size: 24px;
+  line-height: 1.2;
+  color: #1a1a1a80;
+  background-color: #d9d9d9;
+  border: none;
+}
+
+.gallery__new-card-btn:hover {
+  background-color: #c5c5c5;
+  color: #1a1a1a;
+}
+
+.wrapping-row__display-content {
+  display: contents;
+}

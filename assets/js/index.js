@@ -14,25 +14,25 @@ function renderHomeView() {
   notFoundSection.style.display = "none";
 
   const deckTemplateEl = document.querySelector("#deck-template");
-  const deckContainerEl = document.querySelector(".decks__list");
+  const deckContainerEl = document.querySelector(".gallery__list");
   deckContainerEl.innerHTML = "";
 
   function createDeckEl(item) {
     const deckEl = deckTemplateEl.content.querySelector("li").cloneNode(true);
 
     const stringColor = hexToString(item.color);
-    deckEl.classList.add(`deck_color_${stringColor}`);
+    deckEl.classList.add(`card_color_${stringColor}`);
 
-    const deckLinkEl = deckEl.querySelector(".deck__link");
+    const deckLinkEl = deckEl.querySelector(".card__link");
     deckLinkEl.href = `#carousel/${item.id}`;
 
-    const deckTitleEl = deckEl.querySelector(".deck__title");
+    const deckTitleEl = deckEl.querySelector(".card__title");
     deckTitleEl.textContent = item.name;
 
-    const deckCountEl = deckEl.querySelector(".deck__count");
+    const deckCountEl = deckEl.querySelector(".card__count");
     deckCountEl.textContent = `${item.cards.length} cards`;
 
-    const deleteBtn = deckEl.querySelector(".deck__delete-btn");
+    const deleteBtn = deckEl.querySelector(".card__delete-btn");
     deleteBtn.addEventListener("click", () => {
       deckEl.remove();
     });
