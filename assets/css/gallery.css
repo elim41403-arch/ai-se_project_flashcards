@@ -1,7 +1,5 @@
 .gallery {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px 20px;
+  margin: 0;
 }
 
 .gallery__title {
@@ -50,8 +48,8 @@
 
 .gallery__new-card-btn {
   cursor: pointer;
-  width: 325px;
-  height: 205px;
+  width: 100%;
+  aspect-ratio: 65 / 41;
   padding: 20px;
   border-radius: 20px;
   display: flex;
@@ -68,6 +66,26 @@
   color: #1a1a1a;
 }
 
+.wrapping-row {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(min(325px, 100%), 353px));
+  gap: 20px 20px;
+}
+
 .wrapping-row__display-content {
   display: contents;
+}
+
+@media (min-width: 750px) {
+  .wrapping-row {
+    grid-template-columns: repeat(auto-fill, 325px);
+  }
+}
+
+@media (max-width: 600px) {
+  .gallery__title {
+    margin-bottom: 20px;
+    font-size: 32px;
+  }
 }

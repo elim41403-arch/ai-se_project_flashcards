@@ -69,3 +69,34 @@ p.footer__text {
   margin: 0px;
   padding: 0px;
 }
+
+@media (max-width: 600px) {
+  .page {
+    padding: 22px 20px 20px;
+  }
+  .header__title {
+    font-size: 20px;
+    font-weight: 900;
+  }
+  .page__main-content {
+    margin-top: 42px;
+    margin-bottom: 0;
+  }
+  p.footer__text {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+  }
+}
+
+@media (max-width: 360px) {
+  .header__link {
+    font-size: 16px;
+  }
+  .header__title {
+    font-size: 16px;
+  }
+  .nav__link {
+    gap: 18px;
+  }
+}

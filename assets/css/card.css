@@ -1,6 +1,6 @@
 .card {
-  width: 325px;
-  height: 205px;
+  width: 100%;
+  aspect-ratio: 65 / 41;
   padding: 20px;
   display: flex;
   border-radius: 20px;
