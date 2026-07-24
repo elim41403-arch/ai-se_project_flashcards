@@ -1,0 +1,42 @@
+@media (max-width: 805px) {
+  .gallery__new-card-btn {
+    position: fixed;
+    justify-content: center;
+    bottom: 75px;
+    padding: 12px 0px 14px;
+    background-color: #1a1a1a;
+    color: #ffffff;
+    font-size: 18px;
+    font-weight: 500;
+    border-radius: 8px;
+    line-height: 100%;
+    width: calc(100% - 40px);
+    max-width: 353px;
+    aspect-ratio: auto;
+    height: auto;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    z-index: 3;
+  }
+  .page {
+    padding-bottom: 100px;
+  }
+  .page::after {
+    content: "";
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    height: 200px;
+    background: linear-gradient(to bottom, transparent 0%, #ececec 35%);
+    pointer-events: none;
+    z-index: 2;
+  }
+  p.footer__text {
+    position: fixed;
+    bottom: 20px;
+    left: 20px;
+    z-index: 3;
+  }
+}
