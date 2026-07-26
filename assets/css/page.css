@@ -65,12 +65,12 @@
   margin-bottom: 138px;
 }
 
-p.footer__text {
+.footer__text {
   margin: 0px;
   padding: 0px;
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .page {
     padding: 22px 20px 20px;
   }

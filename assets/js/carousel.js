@@ -1,5 +1,6 @@
 import { hexToString } from "./colors.js";
 
+const pageEl = document.querySelector(".page");
 const carouselEl = document.querySelector("#carousel");
 const leftBtn = carouselEl.querySelector(".carousel__btn_type_left");
 const rightBtn = carouselEl.querySelector(".carousel__btn_type_right");
@@ -63,9 +64,13 @@ function updateDisplay() {
   if (showingQuestion === true) {
     carouselCardTxtEl.textContent = currentCard.question;
     carouselCardEl.classList.remove("carousel_card_color_white");
+    carouselCardTxtEl.classList.remove("carousel__card-text-answer");
+    carouselCardTxtEl.classList.add("carousel__card-text-question");
   } else {
     carouselCardTxtEl.textContent = currentCard.answer;
     carouselCardEl.classList.add("carousel_card_color_white");
+    carouselCardTxtEl.classList.add("carousel__card-text-answer");
+    carouselCardTxtEl.classList.remove("carousel__card-text-question");
   }
 }
 
@@ -100,6 +105,7 @@ function renderCarouselView(deck) {
   showingQuestion = true;
   removeColorClasses(carouselCardEl);
   addColorClasses(deck);
+  pageEl.classList.add("page_no-mobile-bar");
   updateDisplay();
 }
 

@@ -8,6 +8,7 @@ const deckViewSection = document.querySelector("#deck-view");
 const carouselSection = document.querySelector("#carousel");
 const notFoundSection = document.querySelector("#not-found");
 
+const pageEl = document.querySelector(".page");
 const homeGalleryListEl = homeSection.querySelector(".gallery__list");
 const pageMainContentEl = document.querySelector(".page__main-content");
 
@@ -52,6 +53,7 @@ function renderHomeView() {
   }
 
   decks.forEach(renderDeckEl);
+  pageEl.classList.remove("page_no-mobile-bar");
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
@@ -60,6 +62,7 @@ function renderNotFoundView() {
   deckViewSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "flex";
+  pageEl.classList.add("page_no-mobile-bar");
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
@@ -75,6 +78,7 @@ function router() {
       renderNotFoundView();
       return;
     }
+    pageEl.classList.remove("page_no-mobile-bar");
     renderDeckView(deck);
   } else if (hash.startsWith("carousel/")) {
     const [, deckId] = hash.split("/");

@@ -83,7 +83,7 @@
   }
 }
 
-@media (max-width: 600px) {
+@media (max-width: 650px) {
   .gallery__title {
     margin-bottom: 20px;
     font-size: 32px;

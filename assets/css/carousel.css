@@ -12,31 +12,49 @@
   padding: 0;
 }
 
-.carousel__card_row {
-  display: flex;
+.carousel__card_grid {
+  display: grid;
+  grid-template-areas:
+    "left-btn card right-btn"
+    ". flip-btn .";
   justify-content: center;
   align-items: center;
-  gap: 20px;
+  gap: 0 20px;
 }
 
 .carousel__card {
-  width: 440px;
+  width: 100%;
+  max-width: 440px;
   height: 300px;
+  min-width: 440px;
   padding: 20px;
   display: flex;
   border-radius: 20px;
   justify-content: center;
   align-items: center;
   box-sizing: border-box;
-  margin-top: 32px;
-  margin-bottom: 24px;
+  margin: 32px 0 24px;
+  grid-area: card;
+  box-shadow:
+    1px -1px 2px 0px #00000040 inset,
+    -1px 2px 2px 0px #ffffffb2 inset,
+    0px 8px 24px 4px #00000040;
 }
 
 .carousel__card-text {
   margin: 0;
   padding: 0;
+}
+
+.carousel__card-text-question {
   font-weight: 700;
   font-size: 32px;
+}
+
+.carousel__card-text-answer {
+  font-weight: 700;
+  font-size: 32px;
+  text-align: center;
 }
 
 .carousel__btn {
@@ -51,6 +69,20 @@
   margin: 0;
   padding: 0;
   cursor: pointer;
+  box-shadow: 0px 1px 4px 0px #00000026;
+}
+
+.carousel__btn_type_left {
+  grid-area: left-btn;
+  justify-self: left;
+}
+.carousel__btn_type_right {
+  grid-area: right-btn;
+  justify-self: right;
+}
+.carousel__btn_type_flip {
+  grid-area: flip-btn;
+  justify-self: center;
 }
 
 .carousel__btn_type_left::before {
@@ -125,4 +157,39 @@
 
 .carousel_card_color_white {
   background-color: white;
+}
+
+@media (max-width: 650px) {
+  .page {
+    padding: 22px 20px 20px;
+  }
+  .header__title {
+    font-size: 20px;
+    font-weight: 900;
+  }
+  .page__main-content {
+    margin-top: 42px;
+    margin-bottom: 0;
+  }
+  .carousel {
+    margin-top: 58px;
+    margin-bottom: 83px;
+  }
+  .carousel__card_grid {
+    grid-template-areas:
+      "card card card"
+      "left-btn flip-btn right-btn";
+    grid-template-columns: repeat(3, minmax(0, calc(440px / 3)));
+    gap: 0;
+  }
+  .carousel__card {
+    height: 420px;
+    margin-bottom: 32px;
+    min-width: 100%;
+    justify-self: center;
+  }
+  .carousel__card-text-answer {
+    font-weight: 500 !important;
+    font-size: 20px !important;
+  }
 }

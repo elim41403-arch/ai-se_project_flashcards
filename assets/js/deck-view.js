@@ -49,6 +49,9 @@ function renderDeckView(deck) {
   carouselSection.style.display = "none";
   notFoundSection.style.display = "none";
 
+  const newCardBtn = deckViewSection.querySelector(".gallery__new-card-btn");
+  newCardBtn.classList.add("gallery__new-card-btn_location_deck-view");
+
   deckViewTitleEl.textContent = deck.name;
   deckViewPracticeBtn.textContent = "Practice";
   deckViewPracticeBtn.onclick = () => {
