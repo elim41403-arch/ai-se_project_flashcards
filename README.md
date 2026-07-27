@@ -1,12 +1,15 @@
 # Flashcard App
 
 My first project in TripleTen's AI-Assisted Software
-Engineering program. It has decks of flashcards about different topics that can be viewed in a carousel.
+Engineering program. This project is an app that has decks of flashcards about different topics that can be viewed in a gallery and flipped through in a carousel.
 
 ## Features
 
 - Displays different topics on seperate decks.
-- Decks have a Carousel of Q&A's that can be looked through
+- Gallery view of all flashcards in a deck.
+- Decks have a carousel of flashcards that can be looked through and used to study.
+- A responsive design that adapts to different screen resolutions (even Mobile screens!).
+- An interactive mobile bar for ease of use of buttons.
 - Includes an Error page if there is not a page found.
 
 ## Techonologies used
@@ -15,12 +18,7 @@ Engineering program. It has decks of flashcards about different topics that can 
 - CSS
 - JavaScript
 
-## Screenshots of the progess:
+## Project Pitch Video
 
-![the carousel view of a deck](./assets/images/demo/deck-carousel.png)
-![the home page view of the decks](./assets/images/demo/home-page.png)
-![the not found page](./assets/images/demo/not-found-page.png)
-
-## Deployed Site
-
-Check out [this site] (https://elim41403-arch.github.io/ai-se_project_flashcards) on GitHub Pages.
+Check out [this video](https://drive.google.com/file/d/1FvFZ_o6dITIhDiY5bnHCWNC7zy-WlR9n/view?usp=drive_link), where I describe my
+project and some challenges I faced while building it.
