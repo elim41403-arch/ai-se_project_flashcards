@@ -7,6 +7,7 @@ const homeSection = document.querySelector("#home");
 const deckViewSection = document.querySelector("#deck-view");
 const carouselSection = document.querySelector("#carousel");
 const notFoundSection = document.querySelector("#not-found");
+const newDeckViewSection = document.querySelector("#new-deck-view");
 
 const pageEl = document.querySelector(".page");
 const homeGalleryListEl = homeSection.querySelector(".gallery__list");
@@ -15,6 +16,7 @@ const pageMainContentEl = document.querySelector(".page__main-content");
 function renderHomeView() {
   homeSection.style.display = "block";
   deckViewSection.style.display = "none";
+  newDeckViewSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "none";
 
@@ -57,9 +59,26 @@ function renderHomeView() {
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
+const newDeckBtn = homeSection.querySelector(".gallery__new-card-btn");
+newDeckBtn.addEventListener("click", () => {
+  window.location.hash = "#new-deck-view";
+  renderNewDeckView();
+});
+
+function renderNewDeckView() {
+  homeSection.style.display = "none";
+  deckViewSection.style.display = "none";
+  newDeckViewSection.style.display = "flex";
+  carouselSection.style.display = "none";
+  notFoundSection.style.display = "none";
+  pageEl.classList.add("page_no-mobile-bar");
+  pageMainContentEl.classList.remove("page__main-content_location_carousel");
+}
+
 function renderNotFoundView() {
   homeSection.style.display = "none";
   deckViewSection.style.display = "none";
+  newDeckViewSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "flex";
   pageEl.classList.add("page_no-mobile-bar");
@@ -80,6 +99,8 @@ function router() {
     }
     pageEl.classList.remove("page_no-mobile-bar");
     renderDeckView(deck);
+  } else if (hash.startsWith("new-deck-view")) {
+    renderNewDeckView();
   } else if (hash.startsWith("carousel/")) {
     const [, deckId] = hash.split("/");
     const deck = getDeckByID(deckId);
@@ -89,6 +110,7 @@ function router() {
     }
     homeSection.style.display = "none";
     deckViewSection.style.display = "none";
+    newDeckViewSection.style.display = "none";
     carouselSection.style.display = "flex";
     notFoundSection.style.display = "none";
     pageMainContentEl.classList.add("page__main-content_location_carousel");
