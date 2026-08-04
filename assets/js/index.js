@@ -2,6 +2,7 @@ import { decks, getDeckByID } from "./decks.js";
 import { stringToHex, hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
 import { renderDeckView } from "./deck-view.js";
+import { disableSubmitBtn } from "./new-deck-view.js";
 
 const homeSection = document.querySelector("#home");
 const deckViewSection = document.querySelector("#deck-view");
@@ -73,6 +74,7 @@ function renderNewDeckView() {
   notFoundSection.style.display = "none";
   pageEl.classList.add("page_no-mobile-bar");
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
+  disableSubmitBtn();
 }
 
 function renderNotFoundView() {
