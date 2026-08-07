@@ -42,8 +42,40 @@ formEl.addEventListener("submit", function (e) {
   e.preventDefault();
   const formData = new FormData(e.target);
   const values = Object.fromEntries(formData);
-  const jsonData = JSON.parse(textarea.value);
+  const jsonData = parseJSON(values.jsonText);
   const normalizedColor = normalizeColor(values.color);
+
+  let isValid = true;
+
+  if (jsonData === null) {
+    isValid = false;
+    showError("JSON parsing failed, invalid JSON text");
+    return;
+  }
+
+  const name = validateName(jsonData.name);
+  if (name === null) {
+    isValid = false;
+    showError("name must be a string between 2 and 80 characters");
+  }
+
+  if (!Array.isArray(jsonData.cards)) {
+    isValid = false;
+    showError("cards must be an array");
+  }
+
+  const jsonColor = jsonData.color;
+  if (typeof jsonColor === "string") {
+    if (jsonColor.toLowerCase() != normalizedColor) {
+      isValid = false;
+      showError("chosen color does not match json color");
+    }
+  }
+
+  if (!isValid) {
+    return;
+  }
+
   const uniqueID = `${slugify(jsonData.name)}-${Date.now()}`;
   const deck = {
     id: slugify(jsonData.name),
@@ -55,8 +87,36 @@ formEl.addEventListener("submit", function (e) {
   window.location.hash = "deck/" + deck.id;
 });
 
+function validateName(name) {
+  if (typeof name != "string" || name.length < 2 || name.length > 80) {
+    return null;
+  }
+  return name;
+}
+
+function parseJSON(jsonString) {
+  try {
+    return JSON.parse(jsonString);
+  } catch (error) {
+    return null;
+  }
+}
+
+const errorModal = document.querySelector("#error-modal");
+const errorCloseBtn = errorModal.querySelector(".modal__close");
+const errorMsgEl = errorModal.querySelector(".modal__error");
+
+errorCloseBtn.addEventListener("click", () => {
+  errorModal.classList.remove("modal_visible");
+});
+
 function disableSubmitBtn() {
   submitBtn.disabled = false;
+}
+
+function showError(message) {
+  errorMsgEl.textContent = `${message}`;
+  errorModal.classList.add("modal_visible");
 }
 
 export { disableSubmitBtn };

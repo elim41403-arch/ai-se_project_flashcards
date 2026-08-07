@@ -128,7 +128,10 @@
               Write the JSON array of cards so that it matches this schema
             </legend>
             <label class="new-deck-view__label">
-              <textarea class="new-deck-view__textarea"></textarea>
+              <textarea
+                name="jsonText"
+                class="new-deck-view__textarea"
+              ></textarea>
             </label>
           </fieldset>
           <button
@@ -170,6 +173,13 @@
         <h2 class="not-found__status-code">404</h2>
         <p class="not-found__text">Sorry, nothing found!</p>
       </section>
+      <div class="modal" id="error-modal">
+        <div class="modal__content">
+          <h2 class="modal__title">An error has occurred</h2>
+          <p class="modal__error"></p>
+          <button class="modal__close" type="button">Dismiss</button>
+        </div>
+      </div>
     </main>
     <template id="deck-template">
       <li class="card card_color">
