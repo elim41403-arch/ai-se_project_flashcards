@@ -1,4 +1,5 @@
-import { decks } from "./decks.js";
+import { addDeck } from "./api.js";
+import { decks, fetchedDecks } from "./decks.js";
 
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 
@@ -78,13 +79,15 @@ formEl.addEventListener("submit", function (e) {
 
   const uniqueID = `${slugify(jsonData.name)}-${Date.now()}`;
   const deck = {
-    id: slugify(jsonData.name),
     name: jsonData.name,
     cards: jsonData.cards,
     color: normalizedColor,
   };
-  decks.push(deck);
-  window.location.hash = "deck/" + deck.id;
+
+  addDeck(deck).then((newDeck) => {
+    fetchedDecks.push(deck);
+    window.location.hash = "deck/" + newDeck._id;
+  });
 });
 
 function validateName(name) {
@@ -119,4 +122,4 @@ function showError(message) {
   errorModal.classList.add("modal_visible");
 }
 
-export { disableSubmitBtn };
+export { disableSubmitBtn, showError };

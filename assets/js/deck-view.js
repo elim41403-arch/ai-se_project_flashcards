@@ -37,7 +37,7 @@ function createCardEl(card, deck) {
 
   const deleteBtn = cardEl.querySelector(".card__delete-btn");
   deleteBtn.addEventListener("click", () => {
-    deck.cards = deck.cards.filter((item) => item.id !== card.id);
+    deck.cards = deck.cards.filter((item) => item._id !== card._id);
     cardEl.remove();
   });
 
@@ -57,7 +57,7 @@ function renderDeckView(deck) {
   deckViewTitleEl.textContent = deck.name;
   deckViewPracticeBtn.textContent = "Practice";
   deckViewPracticeBtn.onclick = () => {
-    window.location.hash = `#carousel/${deck.id}`;
+    window.location.hash = `#carousel/${deck._id}`;
   };
 
   deckViewListEl.innerHTML = "";
