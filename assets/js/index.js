@@ -52,7 +52,6 @@ function createDeckEl(item) {
       .then(() => {
         removeDeckByID(item._id);
         deckEl.remove();
-        console.log(fetchedDecks);
       })
       .catch((err) => {
         showError(err);

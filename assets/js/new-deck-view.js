@@ -77,14 +77,23 @@ formEl.addEventListener("submit", function (e) {
     return;
   }
 
-  addDeck({
+  const deck = {
     name: jsonData.name,
     cards: jsonData.cards,
     color: normalizedColor,
-  })
+  };
+
+  addDeck(deck)
     .then((newDeck) => {
-      fetchedDecks.push(newDeck);
-      window.location.hash = "deck/" + newDeck._id;
+      const deckId = newDeck._id || newDeck.id;
+      const createdDeck = {
+        ...deck,
+        ...newDeck,
+        _id: deckId,
+        cards: deck.cards,
+      };
+      fetchedDecks.push(createdDeck);
+      window.location.hash = "deck/" + deckId;
     })
     .catch(showError);
 });
