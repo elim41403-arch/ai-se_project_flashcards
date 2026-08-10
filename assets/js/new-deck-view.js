@@ -77,17 +77,16 @@ formEl.addEventListener("submit", function (e) {
     return;
   }
 
-  const uniqueID = `${slugify(jsonData.name)}-${Date.now()}`;
-  const deck = {
+  addDeck({
     name: jsonData.name,
     cards: jsonData.cards,
     color: normalizedColor,
-  };
-
-  addDeck(deck).then((newDeck) => {
-    fetchedDecks.push(deck);
-    window.location.hash = "deck/" + newDeck._id;
-  });
+  })
+    .then((newDeck) => {
+      fetchedDecks.push(newDeck);
+      window.location.hash = "deck/" + newDeck._id;
+    })
+    .catch(showError);
 });
 
 function validateName(name) {

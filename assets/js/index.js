@@ -16,15 +16,15 @@ const homeGalleryListEl = homeSection.querySelector(".gallery__list");
 const pageMainContentEl = document.querySelector(".page__main-content");
 const deckTemplateEl = document.querySelector("#deck-template");
 
-function renderHomeView(decks) {
+function renderHomeView(decks = fetchedDecks) {
   homeSection.style.display = "block";
   deckViewSection.style.display = "none";
   newDeckViewSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "none";
 
-  console.log("home");
   homeGalleryListEl.innerHTML = "";
+  decks.forEach(renderDeckEl);
 
   pageEl.classList.remove("page_no-mobile-bar");
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
@@ -48,19 +48,21 @@ function createDeckEl(item) {
 
   const deleteBtn = deckEl.querySelector(".card__delete-btn");
   deleteBtn.addEventListener("click", () => {
-    item.cards = [];
-    deleteDecks(item._id).then();
-    deckEl.remove().then();
-    removeDeckByID().catch((err) => {
-      showError(err);
-    });
+    deleteDecks(item._id)
+      .then(() => {
+        removeDeckByID(item._id);
+        deckEl.remove();
+        console.log(fetchedDecks);
+      })
+      .catch((err) => {
+        showError(err);
+      });
   });
 
   return deckEl;
 }
 function renderDeckEl(item) {
   const deckEl = createDeckEl(item);
-  console.log(homeGalleryListEl);
   homeGalleryListEl.prepend(deckEl);
 }
 
@@ -129,8 +131,8 @@ function router() {
 window.addEventListener("DOMContentLoaded", () => {
   getDecks()
     .then((decks) => {
+      fetchedDecks.push(...decks);
       decks.forEach(renderDeckEl);
-      console.log(decks);
     })
     .catch((err) => {
       showError(err);
