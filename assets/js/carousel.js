@@ -13,6 +13,12 @@ let currentDeck = null;
 let currentIndex = 0;
 let showingQuestion = true;
 
+/**
+ * Removes all BEM color modifier classes from the provided element.
+ *
+ * @param {HTMLElement} element - Element to strip color modifier classes from
+ * @returns {void}
+ */
 function removeColorClasses(element) {
   const classes = [...element.classList];
 
@@ -24,20 +30,44 @@ function removeColorClasses(element) {
 }
 removeColorClasses(carouselCardEl);
 
+/**
+ * Applies the deck color CSS modifier to the carousel card.
+ *
+ * @param {{color:string}} deck - Deck object with a hex color value
+ * @returns {void}
+ */
 function addColorClasses(deck) {
   const stringColor = hexToString(deck.color);
   carouselCardEl.classList.add(`carousel_card_color_${stringColor}`);
 }
 
+/**
+ * Disables a carousel control button visually and functionally.
+ *
+ * @param {HTMLElement} buttonEl - Button element to disable
+ * @returns {void}
+ */
 function disableButton(buttonEl) {
   buttonEl.classList.add("carousel__btn_disabled");
   buttonEl.disabled = true;
 }
+
+/**
+ * Enables a carousel control button visually and functionally.
+ *
+ * @param {HTMLElement} buttonEl - Button element to enable
+ * @returns {void}
+ */
 function enableButton(buttonEl) {
   buttonEl.classList.remove("carousel__btn_disabled");
   buttonEl.removeAttribute("disabled");
 }
 
+/**
+ * Updates the enabled/disabled state of the navigation buttons based on the current card index.
+ *
+ * @returns {void}
+ */
 function updateArrows() {
   if (!currentDeck) return;
 
@@ -54,6 +84,11 @@ function updateArrows() {
   }
 }
 
+/**
+ * Updates the carousel title and card text display for the current card.
+ *
+ * @returns {void}
+ */
 function updateDisplay() {
   if (!currentDeck) return;
 
@@ -99,6 +134,12 @@ flipBtn.onclick = () => {
   updateDisplay();
 };
 
+/**
+ * Renders the carousel view for the selected deck and resets navigation state.
+ *
+ * @param {object} deck - Deck object to display in the carousel
+ * @returns {void}
+ */
 function renderCarouselView(deck) {
   currentDeck = deck;
   currentIndex = 0;

@@ -6,6 +6,7 @@ const carouselSection = document.querySelector("#carousel");
 const notFoundSection = document.querySelector("#not-found");
 const pageMainContentEl = document.querySelector(".page__main-content");
 const newDeckViewSection = document.querySelector("#new-deck-view");
+const aboutSection = document.querySelector("#about");
 
 const deckViewTitleEl = deckViewSection.querySelector(".gallery__title");
 const deckViewPracticeBtn = deckViewSection.querySelector(
@@ -13,6 +14,13 @@ const deckViewPracticeBtn = deckViewSection.querySelector(
 );
 const deckViewListEl = deckViewSection.querySelector(".gallery__list");
 
+/**
+ * Creates a DOM list item for a single deck card with flip and delete behavior.
+ *
+ * @param {{_id:string, question:string, answer:string}} card - Card data to render
+ * @param {{color:string, cards:Array, _id:string}} deck - Parent deck data used for styling and deletion
+ * @returns {HTMLElement} The rendered card list item element
+ */
 function createCardEl(card, deck) {
   const flashcardTemplateEl = document.querySelector("#flashcard-template");
   const cardEl = flashcardTemplateEl.content
@@ -44,11 +52,18 @@ function createCardEl(card, deck) {
   return cardEl;
 }
 
+/**
+ * Renders the deck detail view and attaches navigation to the practice carousel.
+ *
+ * @param {{name:string, cards:Array, _id:string}} deck - Deck object to render
+ * @returns {void}
+ */
 function renderDeckView(deck) {
   homeSection.style.display = "none";
   deckViewSection.style.display = "block";
   newDeckViewSection.style.display = "none";
   carouselSection.style.display = "none";
+  aboutSection.style.display = "none";
   notFoundSection.style.display = "none";
 
   const newCardBtn = deckViewSection.querySelector(".gallery__new-card-btn");

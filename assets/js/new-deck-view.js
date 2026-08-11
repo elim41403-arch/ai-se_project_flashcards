@@ -1,5 +1,5 @@
 import { addDeck } from "./api.js";
-import { decks, fetchedDecks } from "./decks.js";
+import { fetchedDecks } from "./decks.js";
 
 const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
 
@@ -11,6 +11,12 @@ const HEX_DIGITS = /^[0-9a-fA-F]{6}$/;
  * @param {string} str
  * @returns {string}
  */
+/**
+ * Converts a string into a URL-safe slug.
+ *
+ * @param {string} str - Input string to slugify
+ * @returns {string} The slugified string in lowercase with hyphens
+ */
 function slugify(str) {
   return str
     .toLowerCase()
@@ -20,12 +26,10 @@ function slugify(str) {
 }
 
 /**
- * Returns a consistent lowercase hex color string with a leading "#".
- * Accepts values with or without a leading "#". Returns "#64d583" as a
- * fallback if the value is missing or not a valid 6-digit hex.
+ * Returns a normalized hex color string with a leading "#".
  *
- * @param {string|undefined} color
- * @returns {string}
+ * @param {string|undefined} color - Input color value to normalize
+ * @returns {string} A valid 6-digit hex color string starting with '#'
  */
 function normalizeColor(color) {
   if (!color) return "#64d583";
@@ -98,6 +102,12 @@ formEl.addEventListener("submit", function (e) {
     .catch(showError);
 });
 
+/**
+ * Validates that a deck name is a string between 2 and 80 characters.
+ *
+ * @param {unknown} name - Value to validate as a deck name
+ * @returns {string|null} The original name if valid, otherwise null
+ */
 function validateName(name) {
   if (typeof name != "string" || name.length < 2 || name.length > 80) {
     return null;
@@ -105,6 +115,12 @@ function validateName(name) {
   return name;
 }
 
+/**
+ * Parses a JSON string into an object, returning null for invalid JSON.
+ *
+ * @param {string} jsonString - JSON text to parse
+ * @returns {object|null} Parsed object on success, or null on failure
+ */
 function parseJSON(jsonString) {
   try {
     return JSON.parse(jsonString);
@@ -121,10 +137,21 @@ errorCloseBtn.addEventListener("click", () => {
   errorModal.classList.remove("modal_visible");
 });
 
+/**
+ * Enables the form submit button on the new deck view.
+ *
+ * @returns {void}
+ */
 function disableSubmitBtn() {
   submitBtn.disabled = false;
 }
 
+/**
+ * Shows the error modal with the provided message.
+ *
+ * @param {string} message - Message to display in the error modal
+ * @returns {void}
+ */
 function showError(message) {
   errorMsgEl.textContent = `${message}`;
   errorModal.classList.add("modal_visible");

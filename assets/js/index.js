@@ -1,4 +1,4 @@
-import { decks, fetchedDecks, getDeckByID, removeDeckByID } from "./decks.js";
+import { fetchedDecks, getDeckByID, removeDeckByID } from "./decks.js";
 import { stringToHex, hexToString } from "./colors.js";
 import { renderCarouselView } from "./carousel.js";
 import { renderDeckView } from "./deck-view.js";
@@ -10,16 +10,24 @@ const deckViewSection = document.querySelector("#deck-view");
 const carouselSection = document.querySelector("#carousel");
 const notFoundSection = document.querySelector("#not-found");
 const newDeckViewSection = document.querySelector("#new-deck-view");
+const aboutSection = document.querySelector("#about");
 
 const pageEl = document.querySelector(".page");
 const homeGalleryListEl = homeSection.querySelector(".gallery__list");
 const pageMainContentEl = document.querySelector(".page__main-content");
 const deckTemplateEl = document.querySelector("#deck-template");
 
+/**
+ * Renders the home view and populates the gallery with deck cards.
+ *
+ * @param {Array<object>} [decks=fetchedDecks] - List of deck objects to render
+ * @returns {void}
+ */
 function renderHomeView(decks = fetchedDecks) {
   homeSection.style.display = "block";
   deckViewSection.style.display = "none";
   newDeckViewSection.style.display = "none";
+  aboutSection.style.display = "none";
   carouselSection.style.display = "none";
   notFoundSection.style.display = "none";
 
@@ -30,6 +38,12 @@ function renderHomeView(decks = fetchedDecks) {
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
+/**
+ * Creates a DOM element representing a deck card on the home gallery.
+ *
+ * @param {object} item - Deck object containing id, name, color, and cards
+ * @returns {HTMLElement} The rendered deck card element
+ */
 function createDeckEl(item) {
   const deckEl = deckTemplateEl.content.querySelector("li").cloneNode(true);
   deckEl.classList.remove("card_color");
@@ -60,6 +74,13 @@ function createDeckEl(item) {
 
   return deckEl;
 }
+
+/**
+ * Prepends a rendered deck card element to the home gallery list.
+ *
+ * @param {object} item - Deck object to render
+ * @returns {void}
+ */
 function renderDeckEl(item) {
   const deckEl = createDeckEl(item);
   homeGalleryListEl.prepend(deckEl);
@@ -71,6 +92,11 @@ newDeckBtn.addEventListener("click", () => {
   renderNewDeckView();
 });
 
+/**
+ * Shows the new deck creation view and resets relevant page state.
+ *
+ * @returns {void}
+ */
 function renderNewDeckView() {
   homeSection.style.display = "none";
   deckViewSection.style.display = "none";
@@ -82,16 +108,42 @@ function renderNewDeckView() {
   disableSubmitBtn();
 }
 
+/**
+ * Shows the 404 / not found view and hides other sections.
+ *
+ * @returns {void}
+ */
 function renderNotFoundView() {
   homeSection.style.display = "none";
   deckViewSection.style.display = "none";
   newDeckViewSection.style.display = "none";
   carouselSection.style.display = "none";
+  aboutSection.style.display = "none";
   notFoundSection.style.display = "flex";
   pageEl.classList.add("page_no-mobile-bar");
   pageMainContentEl.classList.remove("page__main-content_location_carousel");
 }
 
+/**
+ * Shows the about view and hides all non-related sections.
+ *
+ * @returns {void}
+ */
+function renderAboutView() {
+  homeSection.style.display = "none";
+  deckViewSection.style.display = "none";
+  newDeckViewSection.style.display = "none";
+  carouselSection.style.display = "none";
+  aboutSection.style.display = "flex";
+  notFoundSection.style.display = "none";
+  pageEl.classList.add("page_no-mobile-bar");
+}
+
+/**
+ * Routes the application to the correct view based on the URL hash.
+ *
+ * @returns {void}
+ */
 function router() {
   const hash = window.location.hash.slice(1) || "home";
 
@@ -119,9 +171,12 @@ function router() {
     deckViewSection.style.display = "none";
     newDeckViewSection.style.display = "none";
     carouselSection.style.display = "flex";
+    aboutSection.style.display = "none";
     notFoundSection.style.display = "none";
     pageMainContentEl.classList.add("page__main-content_location_carousel");
     renderCarouselView(deck);
+  } else if (hash.startsWith("about")) {
+    renderAboutView();
   } else {
     renderNotFoundView();
   }
